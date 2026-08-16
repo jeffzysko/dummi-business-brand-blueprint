@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#082A20">
+<title>DUMMI · Business & Brand Blueprint v5.6</title>
+<style>
+html,body{margin:0;min-height:100%;background:#082A20;color:#E6DFD3;font-family:Arial,sans-serif}.loading{min-height:100vh;display:grid;place-items:center;padding:32px;text-align:center}.loading b{font-size:26px;letter-spacing:.03em}.loading span{display:block;margin-top:8px;opacity:.72;font-size:14px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="loading" id="loading"><div><b>DUMMI</b><span>Carregando Business & Brand Blueprint...</span></div></div>
+<script>
+(async()=>{
+ try{
+  if(typeof DecompressionStream==='undefined') throw new Error('Navegador sem suporte a DecompressionStream');
+  const base='https://raw.githubusercontent.com/jeffzysko/dummi-business-brand-blueprint/main/parts/';
+  const files=['00','01','02','03','04','05'];
+  const chunks=await Promise.all(files.map(async n=>{const r=await fetch(base+n+'.txt',{cache:'no-store'});if(!r.ok)throw new Error('Falha ao carregar parte '+n);return r.text()}));
+  const b64=chunks.join('').replace(/\s+/g,'');
+  const binary=atob(b64);
+  const bytes=new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+  const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+  const html=await new Response(stream).text();
+  if(!html.includes('DUMMI')||!html.includes('Business & Brand Blueprint v5.6'))throw new Error('Conteúdo DUMMI inválido');
+  document.open();document.write(html);document.close();
+ }catch(err){console.error(err);document.getElementById('loading').innerHTML='<div><b>DUMMI</b><span>Não foi possível carregar o documento. Recarregue a página ou use um navegador atualizado.</span></div>'}
+})();
+</script>
+</body>
+</html>
